@@ -15,6 +15,5 @@ conn.setEncoding("utf8");
 return conn;
 };
 console.log("Connecting...")
-connect();
 
 module.exports = connect;
