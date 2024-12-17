@@ -7,7 +7,7 @@ const connect = function() {
   });
 
   conn.on("data", () => {
-    conn.write("Hello from client!");
+    console.log("Server says: ", data);
   });
 
   // interpret incoming data as text
