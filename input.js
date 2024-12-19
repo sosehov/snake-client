@@ -13,27 +13,25 @@ const setupInput = function(conn) {
 const handleUserInput = function(key) {
   if (key === "\u0003") {
     process.exit();
-  switch (key) {
-    case "w":
-      //console.log("Move: up");
-      connection.write("Move: up");
-      break;
-    case "a":
-      //console.log("Move: left");
-      connection.write("Move: left");
-      break;
-    case "s":
-      //console.log("Move: down");
-      connection.write("Move: down");
-      break;
-    case "d":
-      //console.log("Move: right");
-      connection.write("Move: right");
-      break;
   }
+  switch (key) {
+  case "w":
+    //console.log("Move: up");
+    connection.write("Move: up");
+    break;
+  case "a":
+    //console.log("Move: left");
+    connection.write("Move: left");
+    break;
+  case "s":
+    //console.log("Move: down");
+    connection.write("Move: down");
+    break;
+  case "d":
+    //console.log("Move: right");
+    connection.write("Move: right");
+    break;
   }
 };
-
-
 
 module.exports = setupInput;
