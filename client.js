@@ -1,26 +1,27 @@
 const net = require("net");
-const { IP, PORT } = require("./constants");
+const { IP, PORT, initials } = require("./constants");
 
- // Create a new connection 
+// Establish a connection with the game server 
 const connect = function() {
-  const conn = net.createConnection({IP, PORT});
-  
+  const conn = net.createConnection(PORT, IP);
+
+  // Print a message to the screen when connection is successfully established and pass client name to the server
   conn.on("connect", () => {
     console.log("Successfully connected to game server");
-    conn.write("Name: SOS");
-
-    // Send move command right after connecting
-    // conn.write("Move: up");
+    conn.write(initials);
   });
-  // Listening for incoming data. Allows us to understand what information we're receiving from the server after sending the Move: up command
+
+  // Listen for incoming data after sending the Move: up command
    conn.on("data", (data) => {
       console.log("Received", data);
     });
 
-    // interpret incoming data as text
-    conn.setEncoding("utf8");
+  // interpret incoming data as text
+  conn.setEncoding("utf8");
 
 return conn;
 };
 
-module.exports = connect;
+module.exports = {
+  connect,
+};
