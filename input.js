@@ -1,4 +1,4 @@
-const { IP, PORT, MOVE_UP_KEY, MOVE_LEFT_KEY, MOVE_DOWN_KEY, MOVE_RIGHT_KEY } = require("./constants");
+const { MOVE_UP_KEY, MOVE_LEFT_KEY, MOVE_DOWN_KEY, MOVE_RIGHT_KEY,keyMessageMapping } = require("./constants");
 
 let connection;
 
@@ -36,12 +36,10 @@ const handleUserInput = function(key) {
   case MOVE_RIGHT_KEY:
     connection.write("Move: right");
     break;
-  case "g":
-    connection.write("Keep playing!");
-    break;
-  case "l":
-    connection.write("Great game!");
-    break;
+  default:
+    if (keyMessageMapping[key]) {
+      connection.write(keyMessageMapping[key]);
+    }
   }
 };
 
