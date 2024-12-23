@@ -1,40 +1,50 @@
+const { IP, PORT, MOVE_UP_KEY, MOVE_LEFT_KEY, MOVE_DOWN_KEY, MOVE_RIGHT_KEY } = require("./constants");
+
 let connection;
 
+// This function includes stdin configuration code
 const setupInput = function(conn) {
   connection = conn;
-  const stdin = process.stdin;  // create variable to hold the stdin object so we don't have to type process.stdin multiple times
-  stdin.setRawMode(true); // Raw Mode allows us to listen for individual keypresses instead of waiting for the user to press enter
-  stdin.setEncoding("utf8"); // utf8 encoding is set so that we can read the text data that is input
+
+  const stdin = process.stdin;  // create variable to hold the stdin object 
+  stdin.setRawMode(true); // Use Raw Mode to listen for individual keypresses
+  stdin.setEncoding("utf8"); // utf8 encoding makes the input text readable
   stdin.resume(); // resume stdin so the program can listen for input
-  stdin.on("data", handleUserInput);
-  return stdin;   // return the stdin object so we can use it elsewhere in the program
+  stdin.on("data", handleUserInput); // Register a listener for input data
+
+  return stdin;   // return the stdin object to be used elsewhere in the program
 };
 
+// This function acts as the data callback handler for stdin
 const handleUserInput = function(key) {
+  // Exit if user presses ctrl + C
   if (key === "\u0003") {
     process.exit();
   }
-
+// Send data string to the server using connection object
   switch (key) {
-  case "w":
+  // Bind the keys to be the up, left, down, right movement keys 
+  case MOVE_UP_KEY:
     connection.write("Move: up");
     break;
-  case "a":
+  case MOVE_LEFT_KEY:
     connection.write("Move: left");
     break;
-  case "s":
+  case MOVE_DOWN_KEY:
     connection.write("Move: down");
     break;
-  case "d":
+  case MOVE_RIGHT_KEY:
     connection.write("Move: right");
     break;
   case "g":
-    connection.write("Keep your secrets safe!");
+    connection.write("Keep playing!");
     break;
   case "l":
-    connection.write("LOLing out?");
+    connection.write("Great game!");
     break;
   }
 };
 
-module.exports = setupInput;
+module.exports = {
+  setupInput,
+};
