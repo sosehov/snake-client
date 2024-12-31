@@ -8,7 +8,7 @@ Before you can run this client, you will need to be running the server side whic
 
 ## Final Product
 
-!["game screenshot"](images/Snake%20screenshot.png)
+!["game screenshot"](images/Snakescreenshot.png)
 
 
 ## Getting Started
